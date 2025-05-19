@@ -77,8 +77,8 @@ describe('Central de Atendimento ao Cliente TAT', () => {
       .contains('Valide os campos obrigatórios!')
   })
 
-  it.only('envia o formuário com sucesso usando um comando customizado', () => {
-    cy.fillMandatoryFieldsAndSubmit({ firstName: 'John', lastName: 'Doe', email: 'John@Doe.zzz', message: 'Este é um elogio' })
+  it('envia o formuário com sucesso usando um comando customizado', () => {
+     cy.fillMandatoryFieldsAndSubmit({ firstName: 'John', lastName: 'Doe', email: 'John@Doe.zzz', message: 'Este é um elogio' })
 
     cy.get('.success')
       .should('be.visible')
