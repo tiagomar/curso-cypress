@@ -3,6 +3,11 @@ on: push
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        viewport:
+          - { width: 1280, height: 720 }
+          - { width: 370, height: 660 }
     steps:
       - name: Checkout
         uses: actions/checkout@v4
