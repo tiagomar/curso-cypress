@@ -9,6 +9,8 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('preenche campos obrigatorios e envia formulario', () => {
+    cy.clock()
+
     let elogio = Cypress._.repeat('asdf', 20)
 
     cy.get('#firstName').type('John')
@@ -21,9 +23,16 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get('.success')
       .should('be.visible')
       .contains('Mensagem enviada com sucesso.')
+
+    cy.tick(3000)
+
+    cy.get('.success')
+      .should('not.be.visible')
   })
 
   it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', () => {
+    cy.clock()
+
     cy.get('#firstName').type('John')
     cy.get('#lastName').type('Doe')
     cy.get('#email').type('invalid-email.zzz')
@@ -34,6 +43,11 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get('.error')
       .should('be.visible')
       .contains('Valide os campos obrigatórios!')
+
+    cy.tick(3000)
+
+    cy.get('.error')
+      .should('not.be.visible')
   })
 
   it('campo telefone continua vazio quando preenchido com valor não numérico', () => {
@@ -78,11 +92,18 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('envia o formuário com sucesso usando um comando customizado', () => {
-     cy.fillMandatoryFieldsAndSubmit({ firstName: 'John', lastName: 'Doe', email: 'John@Doe.zzz', message: 'Este é um elogio' })
+    cy.clock()
+    
+    cy.fillMandatoryFieldsAndSubmit({ firstName: 'John', lastName: 'Doe', email: 'John@Doe.zzz', message: 'Este é um elogio' })
 
     cy.get('.success')
       .should('be.visible')
       .contains('Mensagem enviada com sucesso.')
+
+    cy.tick(3000)
+
+    cy.get('.success')
+      .should('not.be.visible')
   })
   it('seleciona um produto (YouTube) por seu texto', () => {
     cy.get('#product').select('YouTube')
