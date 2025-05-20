@@ -3,13 +3,12 @@ on: push
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        viewport:
-          - { width: 1280, height: 720 }
-          - { width: 370, height: 660 }
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Cypress run
         uses: cypress-io/github-action@v6
+      - name: Cypress run Mobile
+        uses: cypress-io/github-action@v6
+        with:
+          command: npm run testMobile
